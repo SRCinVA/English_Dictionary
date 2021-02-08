@@ -9,8 +9,17 @@ def translate(user_word):  # here, the variable is at the local scope
         return data[user_word] # ... because it has meaning inside the function
     
     elif len(get_close_matches(user_word,data.keys())) > 0: # put data.keys again get_close to find that nearest match, which will produce a list.
-        return "Did you mean '%s' instead?" % get_close_matches(user_word, data.keys())[0]
-    
+        print("Did you mean '%s' instead?" % get_close_matches(user_word, data.keys())[0])
+        refined_answer = input("If so, just type 'Y' (no quotes needed); if not, then type 'N': ")
+        print(refined_answer)
+        if refined_answer.upper() == 'Y':
+            return(data[get_close_matches(user_word, data.keys())[0]])
+        else:
+            user_word = input("No worries; let's restart. Enter a word: ")
+            user_word = user_word.lower()  # just update user_word before the if statement
+            if user_word in data:
+                print(data[user_word])
+
     # my bloated, kludge solution:
     # elif user_word.islower() == False:
     #     lower_case = user_word.lower()
