@@ -14,17 +14,23 @@ def translate(user_word):  # here, the variable is at the local scope
         print(refined_answer)
         if refined_answer.upper() == 'Y':
             return(data[get_close_matches(user_word, data.keys())[0]])
-        else:
+        elif refined_answer.upper() == 'N':
             user_word = input("No worries; let's restart. Enter a word: ")
             user_word = user_word.lower()  # just update user_word before the if statement
             if user_word in data:
                 print(data[user_word])
+        else:
+            print("Uhhh ... I can only use 'Y' or 'N' here.")
+            user_word = input("Anyway ... so, why don't we try again? Enter a word: ")
+            if user_word in data:
+                return data[user_word]
 
     # my bloated, kludge solution:
     # elif user_word.islower() == False:
     #     lower_case = user_word.lower()
     #     if lower_case in data:
     #         return data[lower_case]
+    
     else:
         return "I'm afraid there is no such word ..."
 
