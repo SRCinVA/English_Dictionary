@@ -18,7 +18,7 @@ def translate(user_word):  # here, the variable is at the local scope
             user_word = input("No worries; let's restart. Enter a word: ")
             user_word = user_word.lower()  # just update user_word before the if statement
             if user_word in data:
-                print(data[user_word])
+                return data[user_word]
         else:
             print("Uhhh ... I can only use 'Y' or 'N' here.")
             user_word = input("Anyway ... so, why don't we try again? Enter a word: ")
@@ -36,4 +36,15 @@ def translate(user_word):  # here, the variable is at the local scope
 
 word = input("Enter word:  ") # global variable
 
-print(translate(word)) # same global variable
+output = translate(word)
+
+# let's make it more user friendly
+# to make sure it's from the list and not one of the string responses
+if type(output) == list:
+
+# iterate through the list, to make it more readable.
+    for item in output:
+        print(item)
+else:
+    print(item)
+# print(translate(word)) # same global variable
