@@ -7,7 +7,22 @@ def translate(user_word):  # here, the variable is at the local scope
     user_word = user_word.lower() # just update user_word before the if statement
     if user_word in data:
         return data[user_word] # ... because it has meaning inside the function
+    # Ardit's answer to how to check for capitalization:
+    #elif user_word.title() in data:  # if user entered "texas" this will check for "Texas" as well.
+    #    return data[user_word.title()]
     
+    # my attempt: it actually works, but for some reason you can's use elif here
+    user_word = user_word.capitalize()
+    if user_word in data:
+        return data[user_word]
+    # mine again; also works#
+    # user_word = user_word.upper()
+    # if user_word in data:
+        return data[user_word]
+    # let's try Ardit's way:
+    elif user_word.upper() in data:
+        return data[user_word.upper()]
+
     elif len(get_close_matches(user_word,data.keys())) > 0: # put data.keys again get_close to find that nearest match, which will produce a list.
         print("Did you mean '%s' instead?" % get_close_matches(user_word, data.keys())[0])
         refined_answer = input("If so, just type 'Y' (no quotes needed); if not, then type 'N': ")
