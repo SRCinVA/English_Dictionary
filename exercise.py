@@ -11,8 +11,17 @@ database = "ardit700_pm1database"
 
 cursor = con.cursor()
 
-query = cursor.execute("SELECT * FROM Dictionary WHERE Expression = 'inlay'")
+word = input("Enter a word, please: ")
+
+query = cursor.execute("SELECT * FROM Dictionary WHERE Expression = '%s'" %word)
 results = cursor.fetchall()
 
-print(results)  # the resulting list is a large group of tuples.
+# first, make sure that it's a sensible word (like before)
+if results:
 
+# you need to construct a loop to pull out the tuples (which are separate definitions)
+    for result in results:
+        print(result[1]) # result[1] would have printed just the definitions
+
+else:
+    print("We need a real word, please!")
